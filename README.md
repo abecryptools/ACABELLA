@@ -3,15 +3,22 @@
 
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
 
+ACABELLA is a tool for analyzing the security of Attribute-based encryption (ABE) schemes.
 
-This project is an effort to implement the Venema-Alpar cryptanalysis
-framework for ABE [1]. It also provides an implementation of all the attacks
-found by Venema-Alpar and functionalites for finding master key and
-decryption attacks in ABE schemes.
+ABE is a type of public key encryption in which the keys are linked to attributes. It enforces access control on a cryptographic level in a fine-grained fashion. Both ABE and its multi-authority (MA) variant, MA-ABE can be used in the Cloud and in medical environments to protect private data.
 
-## Installation
+ACABELLA analyzes the security of an ABE scheme according to:
 
-`TODO`
+ - [The Venema-Alpar cryptanalysis framework](https://eprint.iacr.org/2020/460)
+ - [The AC17 framework](https://eprint.iacr.org/2017/233)
+ - [The FABEO property](https://eprint.iacr.org/2022/1415)
+ - It looks for master-key and decryption attacks in the provided ABE scheme
+
+ACABELLA has been created by:
+
+   - Antonio de la Piedra, Kudelski Security Research Team
+   - Marloes Venema, University of Wuppertal
+   - Gergely Alpár, Open University of the Netherlands and Radboud University Nijmegen
 
 ## Requirements
 
