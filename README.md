@@ -311,7 +311,4 @@ Note that the requirements listed at `tools/acabella_web/requirements.txt` must 
 
 ![image info](img/acabella.png)
 
-## References
-
-- [1] https://eprint.iacr.org/2020/460
 
