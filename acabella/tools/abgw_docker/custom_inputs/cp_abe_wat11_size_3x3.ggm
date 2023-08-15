@@ -1,0 +1,56 @@
+params x1,x2,x3 in {0,1}.
+params m1,m2,m3,m4,m5,m6,m7,m8,m9 in Zp.
+params c1,c2,c3,c4,c5,c6,c7,c8,c9,c10 in Zp.
+params c11,c12,c13,c14,c15,c16,c17,c18,c19,c20 in Zp.
+params c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31 in Zp.
+params c32,c33,c34,c35 in Zp.
+
+vars a,r,s,s1,s2,s3,u1,u2,b,b1,b2,b3 in Zp.
+
+params z1,z2 in Zp.
+
+c1*(a + r*b)*((m1*s+m4*u1+m7*u2)*b + s1*b1) +
+c2*(a + r*b)*((m2*s+m5*u1+m8*u2)*b + s2*b2) +
+c3*(a + r*b)*((m3*s+m6*u1+m9*u2)*b + s3*b3) +
+c4*(a + r*b)*s1 +
+c5*(a + r*b)*s2 +
+c6*(a + r*b)*s3 +
+c7*(a + r*b)*s +
+c8*(x1*r*b1)*((m1*s+m4*u1+m7*u2)*b + s1*b1) +
+c9*(x1*r*b1)*((m2*s+m5*u1+m8*u2)*b + s2*b2) +
+c10*(x1*r*b1)*((m3*s+m6*u1+m9*u2)*b + s3*b3) +
+c11*(x1*r*b1)*s1 +
+c12*(x1*r*b1)*s2 +
+c13*(x1*r*b1)*s3 +
+c14*(x1*r*b1)*s +
+c15*(x2*r*b2)*((m1*s+m4*u1+m7*u2)*b + s1*b1) +
+c16*(x2*r*b2)*((m2*s+m5*u1+m8*u2)*b + s2*b2) +
+c17*(x2*r*b2)*((m3*s+m6*u1+m9*u2)*b + s3*b3) +
+c18*(x2*r*b2)*s1 +
+c19*(x2*r*b2)*s2 +
+c20*(x2*r*b2)*s3 +
+c21*(x2*r*b2)*s +
+c22*(x3*r*b3)*((m1*s+m4*u1+m7*u2)*b + s1*b1) +
+c23*(x3*r*b3)*((m2*s+m5*u1+m8*u2)*b + s2*b2) +
+c24*(x3*r*b3)*((m3*s+m6*u1+m9*u2)*b + s3*b3) +
+c25*(x3*r*b3)*s1 +
+c26*(x3*r*b3)*s2 +
+c27*(x3*r*b3)*s3 +
+c28*(x3*r*b3)*s +
+c29*(r)*((m1*s+m4*u1+m7*u2)*b + s1*b1) +
+c30*(r)*((m2*s+m5*u1+m8*u2)*b + s2*b2) +
+c31*(r)*((m3*s+m6*u1+m9*u2)*b + s3*b3) +
+c32*(r)*s1 +
+c33*(r)*s2 +
+c34*(r)*s3 +
+c35*(r)*s 
+= a * s /\
+
+x1*(m1+m4*z1+m7*z2) = 0 /\
+x2*(m2+m5*z1+m8*z2) = 0 /\
+x3*(m3+m6*z1+m9*z2) = 0.
+
+go.
+contradiction.
+
+

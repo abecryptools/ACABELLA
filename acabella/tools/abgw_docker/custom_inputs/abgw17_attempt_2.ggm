@@ -1,0 +1,57 @@
+
+params x1,x2 in Zp.
+params z1,z2,z3,z4 in {0,1}.
+params A11,A12,A21,A22 in Zp.
+params c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18 in Zp.
+params c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33 in Zp.
+params c34,c35,c36 in Zp.
+vars a,r,s,s1,s2,vp,b0,b1,b,bp,rp,sp in Zp.
+
+params w2 in Zp.
+
+c1*(A11*a*s + A11*b*r*s + A12*a*sp + A12*b*r*sp) +
+c2*(A21*a*s + A21*b*r*s + A22*a*sp + A22*b*r*sp) +
+c3*(A11*a*b*s + A11*b*b*r*s + A12*a*b*sp + A12*b*b*r*sp + a*bp*s1 + b*bp*r*s1) +
+c4*(a*b0*s1 + a*b1*s1*x1 + b*b0*r*s1 + b*b1*r*s1*x1) +
+c5*(A21*a*b*s + A21*b*b*r*s + A22*a*b*sp + A22*b*b*r*sp + a*bp*s2 + b*bp*r*s2) +
+c6*(a*b0*s2 + a*b1*s2*x2 + b*b0*r*s2 + b*b1*r*s2*x2) +
+c7*(A11*r*s + A12*r*sp) +
+c8*(A21*r*s + A22*r*sp) +
+c9*(A11*b*r*s + A12*b*r*sp + bp*r*s1) +
+c10*(b0*r*s1 + b1*r*s1*x1) +
+c11*(A21*b*r*s + A22*b*r*sp + bp*r*s2) +
+c12*(b0*r*s2 + b1*r*s2*x2) +
+c13*(A11*bp*r*s*z2/(b0 + b1*x2) + A12*bp*r*sp*z2/(b0 + b1*x2)) +
+c14*(A21*bp*r*s*z2/(b0 + b1*x2) + A22*bp*r*sp*z2/(b0 + b1*x2)) +
+c15*(A11*b*bp*r*s*z2/(b0 + b1*x2) + A12*b*bp*r*sp*z2/(b0 + b1*x2) + bp*bp*r*s1*z2/(b0 + b1*x2)) +
+c16*(b0*bp*r*s1*z2/(b0 + b1*x2) + b1*bp*r*s1*x1*z2/(b0 + b1*x2)) +
+c17*(A21*b*bp*r*s*z2/(b0 + b1*x2) + A22*b*bp*r*sp*z2/(b0 + b1*x2) + bp*bp*r*s2*z2/(b0 + b1*x2)) +
+c18*(bp*r*s2*z2) +
+c19*(A11*a*s + A11*b*rp*s + A12*a*sp + A12*b*rp*sp) +
+c20*(A21*a*s + A21*b*rp*s + A22*a*sp + A22*b*rp*sp) +
+c21*(A11*a*b*s + A11*b*b*rp*s + A12*a*b*sp + A12*b*b*rp*sp + a*bp*s1 + b*bp*rp*s1) +
+c22*(a*b0*s1 + a*b1*s1*x1 + b*b0*rp*s1 + b*b1*rp*s1*x1) +
+c23*(A21*a*b*s + A21*b*b*rp*s + A22*a*b*sp + A22*b*b*rp*sp + a*bp*s2 + b*bp*rp*s2) +
+c24*(a*b0*s2 + a*b1*s2*x2 + b*b0*rp*s2 + b*b1*rp*s2*x2) +
+c25*(A11*rp*s + A12*rp*sp) +
+c26*(A21*rp*s + A22*rp*sp) +
+c27*(A11*b*rp*s + A12*b*rp*sp + bp*rp*s1) +
+c28*(b0*rp*s1 + b1*rp*s1*x1) +
+c29*(A21*b*rp*s + A22*b*rp*sp + bp*rp*s2) +
+c30*(b0*rp*s2 + b1*rp*s2*x2) +
+c31*(A11*bp*rp*s*z4/(b0 + b1*x2) + A12*bp*rp*sp*z4/(b0 + b1*x2)) +
+c32*(A21*bp*rp*s*z4/(b0 + b1*x2) + A22*bp*rp*sp*z4/(b0 + b1*x2)) +
+c33*(A11*b*bp*rp*s*z4/(b0 + b1*x2) + A12*b*bp*rp*sp*z4/(b0 + b1*x2) + bp*bp*rp*s1*z4/(b0 + b1*x2)) +
+c34*(b0*bp*rp*s1*z4/(b0 + b1*x2) + b1*bp*rp*s1*x1*z4/(b0 + b1*x2)) +
+c35*(A21*b*bp*rp*s*z4/(b0 + b1*x2) + A22*b*bp*rp*sp*z4/(b0 + b1*x2) + bp*bp*rp*s2*z4/(b0 + b1*x2)) +
+c36*(bp*rp*s2*z4)
+= a * s /\
+
+z1*A11 + z1*A12*w2 = 0 /\
+z2*A21 + z2*A22*w2 = 0 /\
+z3*A11 + z3*A12*w2 = 0 /\
+z4*A21 + z4*A22*w2 = 0.
+
+go.
+contradiction.
+

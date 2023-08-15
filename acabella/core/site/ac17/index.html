@@ -1,0 +1,696 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../master/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+    
+    
+      
+        <title>Security analysis - ACABELLA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#analyzing-the-security-of-abe-schemes-using-acabella" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ACABELLA" class="md-header__button md-logo" aria-label="ACABELLA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ACABELLA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Security analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ACABELLA" class="md-nav__button md-logo" aria-label="ACABELLA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ACABELLA
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Security analysis
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Security analysis
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-analyzing-a-secure-scheme" class="md-nav__link">
+    Example: analyzing a secure scheme
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-analyzing-an-insecure-scheme" class="md-nav__link">
+    Example: analyzing an insecure scheme
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../master/" class="md-nav__link">
+        Finding master key attacks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../decryption/" class="md-nav__link">
+        Finding decryption attacks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../corruption/" class="md-nav__link">
+        Utilization of corruption
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../json/" class="md-nav__link">
+        JSON description
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../abgw/" class="md-nav__link">
+        Bridge to the ABGW17 analyzer
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        Reference API
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-analyzing-a-secure-scheme" class="md-nav__link">
+    Example: analyzing a secure scheme
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-analyzing-an-insecure-scheme" class="md-nav__link">
+    Example: analyzing an insecure scheme
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="analyzing-the-security-of-abe-schemes-using-acabella">Analyzing the security of ABE schemes using ACABELLA</h1>
+<p>In this part of the documentation, we show how to analyze the
+security of ABE schemes using the <code>SecurityAttack</code> class and also, using
+the acabella command line tool.</p>
+<p>The <code>SecurityAttack</code> class (and the <code>Analysis</code> class, when using the security analysis part) performs the following checks:</p>
+<ul>
+<li>It validates whether the scheme satisfies the AC17 form or not.</li>
+<li>It checks if the scheme is trivially and collusion secure.</li>
+<li>For secure schemes, it finds a proof for the symbolic property (in the AC17 framework).</li>
+<li>It validates whether the ABE scheme sastisfies the FABEO property or not.</li>
+</ul>
+<p>Using the analysis report, the practitioner can look further into the possiblity of attacking the scheme via master key attacks and decryption attacks, as we explain in the next sections.</p>
+<h2 id="example-analyzing-a-secure-scheme">Example: analyzing a secure scheme</h2>
+<p>We'll analyze the security of the RW13 ABE scheme using the SecurityAttack class.
+First, we need to declare the encodings of the scheme as Sympy symbols and create lists of encodings for each type, e.g., key encodings, ciphertext encodings, MPK encodings, etc. We also need to identify the unknown variables of the scheme:</p>
+<pre><code class="language-python">    alpha, b, bp, b0, b1, r, rp, rp2, x, y, z, s, sp, sp2, v2 = symbols('alpha, b, bp, b0, b1, r, rp, rp2, x, y, z, s, sp, sp2, v2')
+
+    k1 = alpha + r*b
+    k2 = r*bp + rp*(b0 + y*b1)
+    k3 = r
+    k4 = rp
+    k5 = r*bp + rp2*(b0 + z*b1)
+    k6 = rp2
+    c1 = (s-v2)*b + sp*bp
+    c2 = sp*(b0 + x*b1)
+    c3 = s
+    c4 = sp
+    c5 = v2*b + sp2*bp
+    c6 = sp2*(b0 + z*b1)
+    c7 = sp2
+    mpk1 = b0
+    mpk2 = b1
+    mpk3 = b
+    mpk4 = bp
+
+    # known values: x, y
+
+    unknown = [alpha, b, b0, b1, bp, r, rp, rp2, s, sp, sp2, v2]
+
+    k = [k1, k2, k3, k4, k5, k6]
+    c = [c1, c2, c3, c4, c5, c6, c7]
+    mpk = [mpk1, mpk2, mpk3, mpk4]
+</code></pre>
+<p>Then, we create a SecurityAttack() element and initialize it with the description of alpha, s, the blinding factor and the encodings. The fourth parameter is related to the type of scheme we are dealing with, and if this scheme is fractional or not:</p>
+<pre><code class="language-python">    security_attack = SecurityAttack()
+    security_attack.init(alpha*s, k, c, mpk, unknown)
+    security_attack.run()
+    print(&quot;\n[*] Security analysis results:\n&quot;)
+    print(&quot;\n&quot; + security_attack.show_solution())
+    security_attack.show_proof()
+</code></pre>
+<p>It produces the following analysis report:</p>
+<pre><code class="language-bash">
+[*] Security analysis results:
+
+
+See the analysis report below. If the scheme is MA-ABE you might try to run this check with corruption.
+
+
+ The pair encoding scheme satisfies the AC17 form. The ciphertext encoding previously contained non-lone variables that act as lone variables. These have now been replaced by lone variables.
+
+
+ Performing security analysis on the following encodings:
+
+                MPK encodings:                  [b0, b1, b, bp]
+
+                Key encodings:                  [alpha + b*r, b0*rp + b1*rp*y + bp*r, r, rp, b0*rp2 + b1*rp2*z + bp*r, rp2]
+
+                Ciphertext encodings:   [b*s + bp*sp - v2, b0*sp + b1*sp*x, s, sp, bp*sp2 + v2, b0*sp2 + b1*sp2*z, sp2]
+
+
+ == Performing simple trivial security check.. ==
+
+         Passed! The security of the scheme depends on whether at least one of the following assumption(s) holds:
+
+                 (1) x - z != 0
+
+ == Performing collusion security checks.. ==
+
+
+         The scheme satisfies our collusion property and is thus secure against collusion. 
+
+         The scheme satisfies the FABEO property and is thus secure against collusion. 
+
+         Generating transcript that proves that the FABEO property holds..
+                 For the transcript, we use the following reference vector of monomials: 
+                        [r*v2, b*r*s, bp*r*sp, b0*r*sp, b1*r*sp, bp*r*sp2, b0*r*sp2, b1*r*sp2, rp*v2, b*rp*s, bp*rp*sp, b0*rp*sp, b1*rp*sp, bp*rp*sp2, b0*rp*sp2, b1*rp*sp2, rp2*v2, b*rp2*s, bp*rp2*sp, b0*rp2*sp, b1*rp2*sp, bp*rp2*sp2, b0*rp2*sp2, b1*rp2*sp2, alpha*s, b0*rp*s, bp*r*s, b1*rp*s, b0*rp2*s, b1*rp2*s, alpha*sp, b*r*sp, alpha*sp2, b*r*sp2]
+
+                 The vector with 1 in the entry corresponding to alpha*s and 0 in the entries corresponding to alpha*sp,alpha*sp2 is: 
+                        [0, -1, 1, 0, 0, 0, 0, 0, 0, 0, 0, -x/(x - y), 1/(x - y), 0, 0, 0, 0, 0, 0, -x/(x - z), 1/(x - z), 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+                 The vector with 1 in the entry corresponding to alpha*sp and 0 in the entries corresponding to alpha*s,alpha*sp2 is: 
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0]
+
+                 The vector with 1 in the entry corresponding to alpha*sp2 and 0 in the entries corresponding to alpha*s,alpha*sp is: 
+                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, -1]
+
+== Generating a security proof for the following encodings: ==
+
+                MPK encodings:                  [b0, b1, b, bp]
+
+                Key encodings:                  [alpha + b*r, b0*rp + b1*rp*y + bp*r, r, rp, b0*rp2 + b1*rp2*z + bp*r, rp2]
+
+                Ciphertext encodings:   [b*s + bp*sp - v2, b0*sp + b1*sp*x, s, sp, bp*sp2 + v2, b0*sp2 + b1*sp2*z, sp2]
+
+
+ The selective proof: 
+
+⎛                                                                                    
+⎜                                                                                    
+⎜⎡⎛    ⎡0  0   0  0 ⎤⎞  ⎛    ⎡0  0  0  0⎤⎞  ⎛   ⎡-1  0  -1  0⎤⎞  ⎛    ⎡0  0  0  0⎤⎞⎤ 
+⎜⎢⎜    ⎢            ⎥⎟  ⎜    ⎢          ⎥⎟  ⎜   ⎢            ⎥⎟  ⎜    ⎢          ⎥⎟⎥ 
+⎜⎢⎜b₀, ⎢0  -x  0  0 ⎥⎟, ⎜b₁, ⎢0  1  0  0⎥⎟, ⎜b, ⎢0   0  0   0⎥⎟, ⎜bp, ⎢1  0  0  0⎥⎟⎥,
+⎜⎢⎜    ⎢            ⎥⎟  ⎜    ⎢          ⎥⎟  ⎜   ⎢            ⎥⎟  ⎜    ⎢          ⎥⎟⎥ 
+⎜⎣⎝    ⎣0  0   0  -z⎦⎠  ⎝    ⎣0  0  0  1⎦⎠  ⎝   ⎣0   0  0   0⎦⎠  ⎝    ⎣0  0  1  0⎦⎠⎦ 
+⎜                                                                                    
+⎝                                                                                    
+
+                                                                             ⎡       
+                                                                             ⎢⎛   ⎡1⎤
+                                                                             ⎢⎜   ⎢ ⎥
+                                                                             ⎢⎜   ⎢0⎥
+ [(s, [1  0  0]), (sp, [0  1  0]), (sp₂, [0  0  1])], [(v₂, [0  0  -1  0])], ⎢⎜r, ⎢ ⎥
+                                                                             ⎢⎜   ⎢0⎥
+                                                                             ⎢⎜   ⎢ ⎥
+                                                                             ⎢⎝   ⎣0⎦
+                                                                             ⎣       
+
+   ⎛    ⎡  0  ⎤⎞  ⎛     ⎡  0  ⎤⎞⎤            ⎞
+⎞  ⎜    ⎢     ⎥⎟  ⎜     ⎢     ⎥⎟⎥            ⎟
+⎟  ⎜    ⎢  1  ⎥⎟  ⎜     ⎢  1  ⎥⎟⎥  ⎡⎛   ⎡1⎤⎞⎤⎟
+⎟  ⎜    ⎢─────⎥⎟  ⎜     ⎢─────⎥⎟⎥  ⎢⎜   ⎢ ⎥⎟⎥⎟
+⎟, ⎜rp, ⎢x - y⎥⎟, ⎜rp₂, ⎢x - z⎥⎟⎥, ⎢⎜α, ⎢0⎥⎟⎥⎟
+⎟  ⎜    ⎢     ⎥⎟  ⎜     ⎢     ⎥⎟⎥  ⎢⎜   ⎢ ⎥⎟⎥⎟
+⎟  ⎜    ⎢  0  ⎥⎟  ⎜     ⎢  0  ⎥⎟⎥  ⎣⎝   ⎣0⎦⎠⎦⎟
+⎠  ⎜    ⎢     ⎥⎟  ⎜     ⎢     ⎥⎟⎥            ⎟
+   ⎝    ⎣  0  ⎦⎠  ⎝     ⎣  0  ⎦⎠⎦            ⎠
+
+
+ The selective proof verifies correctly. 
+
+
+ The co-selective proof: 
+
+⎛⎡⎛    ⎡0  0   0⎤⎞  ⎛    ⎡0  0  0⎤⎞  ⎛   ⎡1  0  0⎤⎞  ⎛    ⎡0   0  0⎤⎞⎤               
+⎜⎢⎜    ⎢        ⎥⎟  ⎜    ⎢       ⎥⎟  ⎜   ⎢       ⎥⎟  ⎜    ⎢        ⎥⎟⎥               
+⎜⎢⎜    ⎢0  -y  0⎥⎟  ⎜    ⎢0  1  0⎥⎟  ⎜   ⎢0  0  0⎥⎟  ⎜    ⎢0   0  0⎥⎟⎥  ⎡            
+⎜⎢⎜b₀, ⎢        ⎥⎟, ⎜b₁, ⎢       ⎥⎟, ⎜b, ⎢       ⎥⎟, ⎜bp, ⎢        ⎥⎟⎥, ⎢(s, [1  0  0
+⎜⎢⎜    ⎢0  1   1⎥⎟  ⎜    ⎢0  0  0⎥⎟  ⎜   ⎢0  0  0⎥⎟  ⎜    ⎢-1  0  0⎥⎟⎥  ⎣            
+⎜⎢⎜    ⎢        ⎥⎟  ⎜    ⎢       ⎥⎟  ⎜   ⎢       ⎥⎟  ⎜    ⎢        ⎥⎟⎥               
+⎝⎣⎝    ⎣0  z   0⎦⎠  ⎝    ⎣0  0  1⎦⎠  ⎝   ⎣0  0  0⎦⎠  ⎝    ⎣-z  0  0⎦⎠⎦               
+
+
+                                                                                ⎡⎛   
+       ⎛    ⎡    -1      x     -1  ⎤⎞                     ⎤                     ⎢⎜   
+  0]), ⎜sp, ⎢0  ─────  ─────  ─────⎥⎟, (sp₂, [0  0  0  0])⎥, [(v₂, [0  0  0])], ⎢⎜r, 
+       ⎝    ⎣   x - y  x - z  x - z⎦⎠                     ⎦                     ⎢⎜   
+                                                                                ⎣⎝   
+
+
+                                 ⎡⎛   ⎡1⎤⎞⎤⎞
+⎡-1⎤⎞  ⎛    ⎡0 ⎤⎞  ⎛     ⎡0 ⎤⎞⎤  ⎢⎜   ⎢ ⎥⎟⎥⎟
+⎢  ⎥⎟  ⎜    ⎢  ⎥⎟  ⎜     ⎢  ⎥⎟⎥  ⎢⎜   ⎢0⎥⎟⎥⎟
+⎢0 ⎥⎟, ⎜rp, ⎢-1⎥⎟, ⎜rp₂, ⎢0 ⎥⎟⎥, ⎢⎜α, ⎢ ⎥⎟⎥⎟
+⎢  ⎥⎟  ⎜    ⎢  ⎥⎟  ⎜     ⎢  ⎥⎟⎥  ⎢⎜   ⎢0⎥⎟⎥⎟
+⎣0 ⎦⎠  ⎝    ⎣0 ⎦⎠  ⎝     ⎣-1⎦⎠⎦  ⎢⎜   ⎢ ⎥⎟⎥⎟
+                                 ⎣⎝   ⎣0⎦⎠⎦⎠
+
+
+ The co-selective proof verifies correctly. 
+</code></pre>
+<h2 id="example-analyzing-an-insecure-scheme">Example: analyzing an insecure scheme</h2>
+<p>In this example, we'll analyze an insecure scheme, namely the NDCW15 scheme, which can be attacked via a decryption attack (which we show in the next section).</p>
+<p>First, we'll prepare a JSON file including the definition of the scheme, that is, the description of alpha, s, the blinding factor and the respective encodings and unknown variables:</p>
+<pre><code class="language-json">{
+    &quot;scheme_id&quot;: &quot;ndcw15&quot;,
+    &quot;analysis&quot;: &quot;security&quot;,
+    &quot;k&quot;: [&quot;alpha * (1 / (b1 + x3)) + x2 * b2 * (1 / (b1 + x3))&quot;, &quot;x1&quot;, &quot;x1 * b1&quot;],
+    &quot;c&quot;: [&quot;s&quot;, &quot;s * b1&quot;, &quot;s * b2&quot;],
+    &quot;mpk&quot;: [],
+    &quot;key&quot; : &quot;alpha * s&quot;,
+    &quot;unknown_vars&quot; :  [&quot;alpha&quot;, &quot;b1&quot;, &quot;b2&quot;, &quot;s&quot;],
+    &quot;corruptable_vars&quot;: []
+}
+</code></pre>
+<p>We then can run ACABELLA and obtain the following analysis report, which finds that the scheme is trivially broken:</p>
+<p><strong>Note</strong></p>
+<blockquote>
+<p>The respective JSON files, and others, for the NDCW15 scheme are included in the current ACABELLA distribution.</p>
+</blockquote>
+<pre><code class="language-python">$ python acabella_cmd.py -a sec -c examples/ndcw15/ndcw15_analysis_config.json
+[*] ACABELLA cmd tool
+
+
+[*] Analyzing scheme...
+
+
+
+[*] Security analysis results:
+
+
+See the analysis report below. If the scheme is MA-ABE you might try to run this check with corruption.
+
+                MPK encodings:                  []
+
+                Key encodings:                  [alpha/(b1 + x3) + b2*x2/(b1 + x3), x1, b1*x1]
+
+                Ciphertext encodings:   [s, b1*s, b2*s]
+
+
+ == Performing simple trivial security check.. ==
+
+                 (1)  c0*(-x2/x3**2) = d0
+                 (2)  c0*(x2/x3) = d1
+                 (3)  d0*(x3) + d1*1 != 0
+
+         where c0,d0,d1 denote the coefficients, then the scheme is trivially secure.
+
+         The scheme may not be trivially secure, because no solution could be found.
+
+ == Performing collusion security check.. ==
+
+         Attempting to compute transcript to trivial and collusion security..
+
+         The system could not find a transcript.
+
+         If there exists a solution for the previous system of equations such that the following system of equations holds:
+
+
+         then the scheme is secure against collusion. If not, then the scheme may be vulnerable to a collusion attack.
+</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+      
+    
+  </body>
+</html>

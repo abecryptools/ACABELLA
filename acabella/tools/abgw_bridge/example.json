@@ -1,0 +1,12 @@
+{
+    "scheme_id": "yjr13",
+    "analysis": "abgw",
+    "k": ["a * (1 / x1) + x2 * b + r * (b / bp)", "r * bp * (1 / x1)", "r * b"],
+    "c": ["s", "s / bp"],
+    "mpk": ["bp"],
+    "gp": ["b"],
+    "key" : "a * s",
+    "unknown_vars" :  ["a", "r", "s", "b", "bp"],
+    "known_vars" : ["x1", "x2"]
+}
+

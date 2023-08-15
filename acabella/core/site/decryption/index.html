@@ -1,0 +1,1339 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../master/">
+      
+      
+        <link rel="next" href="../corruption/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+    
+    
+      
+        <title>Finding decryption attacks - ACABELLA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#finding-decryption-attacks-in-abe-schemes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ACABELLA" class="md-header__button md-logo" aria-label="ACABELLA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ACABELLA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Finding decryption attacks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ACABELLA" class="md-nav__button md-logo" aria-label="ACABELLA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ACABELLA
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ac17/" class="md-nav__link">
+        Security analysis
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../master/" class="md-nav__link">
+        Finding master key attacks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Finding decryption attacks
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Finding decryption attacks
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#finding-decryption-attacks-in-abe-schemes" class="md-nav__link">
+    Finding decryption attacks in ABE schemes
+  </a>
+  
+    <nav class="md-nav" aria-label="Finding decryption attacks in ABE schemes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-json-input-for-acabella" class="md-nav__link">
+    The JSON input for ACABELLA
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-of-corruptable-variables-in-decryption-attacks" class="md-nav__link">
+    Type of corruptable variables in decryption attacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attacking-cm14" class="md-nav__link">
+    Attacking CM14
+  </a>
+  
+    <nav class="md-nav" aria-label="Attacking CM14">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-the-involved-encodings" class="md-nav__link">
+    Obtaining the involved encodings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-inputs-for-acabella" class="md-nav__link">
+    Generating inputs for ACABELLA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attacking-po17" class="md-nav__link">
+    Attacking PO17
+  </a>
+  
+    <nav class="md-nav" aria-label="Attacking PO17">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-the-involved-encodings_1" class="md-nav__link">
+    Obtaining the involved encodings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-inputs-for-acabella_1" class="md-nav__link">
+    Generating inputs for ACABELLA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attacking-ndcw15" class="md-nav__link">
+    Attacking NDCW15
+  </a>
+  
+    <nav class="md-nav" aria-label="Attacking NDCW15">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-the-involved-encodings_2" class="md-nav__link">
+    Obtaining the involved encodings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-inputs-for-acabella_2" class="md-nav__link">
+    Generating inputs for ACABELLA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attacking-yj14" class="md-nav__link">
+    Attacking YJ14
+  </a>
+  
+    <nav class="md-nav" aria-label="Attacking YJ14">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-the-involved-encodings_3" class="md-nav__link">
+    Obtaining the involved encodings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-inputs-for-acabella_3" class="md-nav__link">
+    Generating inputs for ACABELLA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attacking-yjr13" class="md-nav__link">
+    Attacking YJR13
+  </a>
+  
+    <nav class="md-nav" aria-label="Attacking YJR13">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-the-involved-encodings_4" class="md-nav__link">
+    Obtaining the involved encodings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-inputs-for-acabella_4" class="md-nav__link">
+    Generating inputs for ACABELLA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advice-on-finding-decryption-attacks" class="md-nav__link">
+    Advice on finding decryption attacks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../corruption/" class="md-nav__link">
+        Utilization of corruption
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../json/" class="md-nav__link">
+        JSON description
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../abgw/" class="md-nav__link">
+        Bridge to the ABGW17 analyzer
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        Reference API
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#finding-decryption-attacks-in-abe-schemes" class="md-nav__link">
+    Finding decryption attacks in ABE schemes
+  </a>
+  
+    <nav class="md-nav" aria-label="Finding decryption attacks in ABE schemes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-json-input-for-acabella" class="md-nav__link">
+    The JSON input for ACABELLA
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type-of-corruptable-variables-in-decryption-attacks" class="md-nav__link">
+    Type of corruptable variables in decryption attacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attacking-cm14" class="md-nav__link">
+    Attacking CM14
+  </a>
+  
+    <nav class="md-nav" aria-label="Attacking CM14">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-the-involved-encodings" class="md-nav__link">
+    Obtaining the involved encodings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-inputs-for-acabella" class="md-nav__link">
+    Generating inputs for ACABELLA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attacking-po17" class="md-nav__link">
+    Attacking PO17
+  </a>
+  
+    <nav class="md-nav" aria-label="Attacking PO17">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-the-involved-encodings_1" class="md-nav__link">
+    Obtaining the involved encodings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-inputs-for-acabella_1" class="md-nav__link">
+    Generating inputs for ACABELLA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attacking-ndcw15" class="md-nav__link">
+    Attacking NDCW15
+  </a>
+  
+    <nav class="md-nav" aria-label="Attacking NDCW15">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-the-involved-encodings_2" class="md-nav__link">
+    Obtaining the involved encodings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-inputs-for-acabella_2" class="md-nav__link">
+    Generating inputs for ACABELLA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attacking-yj14" class="md-nav__link">
+    Attacking YJ14
+  </a>
+  
+    <nav class="md-nav" aria-label="Attacking YJ14">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-the-involved-encodings_3" class="md-nav__link">
+    Obtaining the involved encodings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-inputs-for-acabella_3" class="md-nav__link">
+    Generating inputs for ACABELLA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attacking-yjr13" class="md-nav__link">
+    Attacking YJR13
+  </a>
+  
+    <nav class="md-nav" aria-label="Attacking YJR13">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-the-involved-encodings_4" class="md-nav__link">
+    Obtaining the involved encodings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generating-inputs-for-acabella_4" class="md-nav__link">
+    Generating inputs for ACABELLA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advice-on-finding-decryption-attacks" class="md-nav__link">
+    Advice on finding decryption attacks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h2 id="finding-decryption-attacks-in-abe-schemes">Finding decryption attacks in ABE schemes</h2>
+<p>In this section we show, step by step, how to find decryption attacks in 
+ABE schemes. First, we start by describing the JSON input file that
+ACABELLA expects for looking for this type of attack.</p>
+<h3 id="the-json-input-for-acabella">The JSON input for ACABELLA</h3>
+<p>In decryption attacks, the MPK value introduces the encodings in the matrix. When using  the AA extended corruption model, this value is equivalent to MPK_AAj. However the MPK_AAj input field is only use for adding descriptive information about the structure of an attribute authority. </p>
+<p><strong>Note</strong></p>
+<blockquote>
+<p>Take into account that both MPK_AAj and MPK_AAi do not insert any additional encoding into the matrix.</p>
+</blockquote>
+<h3 id="type-of-corruptable-variables-in-decryption-attacks">Type of corruptable variables in decryption attacks</h3>
+<p>Similarly, in decryption attacks the corrupted variables (<code>DecryptionKeyCorruptedVariable</code>) can be categorized as:</p>
+<ul>
+<li>MPK_AAi: The variable belongs to an Attribute Authority j. It will be used to obtain the master key of an AA[i].</li>
+<li>misc = misc. variable part of an attribute autority [i].</li>
+</ul>
+<h3 id="attacking-cm14">Attacking CM14</h3>
+<p>The CM14 scheme [^1] is a multi-authority ABE where there are only distributed AAs and no CA.
+During Setup, every authority generates a secret key consisting of <script type="math/tex">\alpha_i</script>, <script type="math/tex">\beta_i</script> and for every attribte <script type="math/tex">j</script>, <script type="math/tex">t_j</script>.
+The public key of every authority consists of the tuple <script type="math/tex">e(g, g)^{\alpha_i}</script>, <script type="math/tex">g^{\beta_i}</script> and <script type="math/tex">g^{t_j}</script>. Every user
+of the system has an identifier (GID). This identifier is involved in the key components to link them to the user.</p>
+<p>During key generation, the attribute-independent component is:</p>
+<ul>
+<li>
+<script type="math/tex">D_o</script> = <script type="math/tex">H(GID)^{1/\beta_i} \cdot g^{\frac{\alpha_i}{\beta_i}}</script>
+</li>
+</ul>
+<p>During encryption, the attribute-independent component is <script type="math/tex">\beta_i \cdot s</script>.</p>
+<h4 id="obtaining-the-involved-encodings">Obtaining the involved encodings</h4>
+<p>To obtain the involved key encodings, we take <script type="math/tex">D_o</script> and replace the hash of GID by
+<script type="math/tex">g^r</script> and add the encoding <script type="math/tex">g^r</script>. Then, we rename <script type="math/tex">\beta_i</script> as <script type="math/tex">\beta_i</script> and obtain: 
+<script type="math/tex">(\frac{r + \alpha_i}{b_i}, r)</script> as encodings. From the ciphertext encodings, we obtain
+<script type="math/tex">(b_i \cdot s)</script>. And as MPK encodings, we obtain <script type="math/tex">b_i</script>.</p>
+<p>As unknown variables, we have: <script type="math/tex">\alpha_i</script>, <script type="math/tex">r</script>, <script type="math/tex">s</script>, <script type="math/tex">b_i</script>.</p>
+<h4 id="generating-inputs-for-acabella">Generating inputs for ACABELLA</h4>
+<p>In this case, we can only perform an decryption attack with or without corruption. If we use corruption, we should use the <code>AA_extended</code> corruption model, based on the corruption of an attribute authority where we obtain one of its values (and possibly, key or ciphertext components) and on the use of the recovered parameters to attack an honest attribute authority.</p>
+<p>Given on the encodings that we have obtained in the past section, we can prepare the following input to ACABELLA for a decryption attack without corruption:</p>
+<pre><code>{
+    &quot;scheme_id&quot;: &quot;cm14&quot;,
+    &quot;analysis&quot;: &quot;decryption&quot;,
+    &quot;k&quot;: [&quot;(alpha_i + r) / b&quot;, &quot;r&quot;],
+    &quot;c&quot;: [&quot;s * b&quot;],
+    &quot;mpk&quot;: [&quot;b&quot;],
+    &quot;gp&quot;: [],
+    &quot;key&quot; : &quot;alpha_i * s&quot;,
+    &quot;unknown_vars&quot; :  [&quot;alpha_i&quot;, &quot;r&quot;, &quot;s&quot;, &quot;b&quot;],
+    &quot;corruption_model&quot;: &quot;NoCorruption&quot;,
+    &quot;corruptable_vars&quot;: [],
+    &quot;MPK_AAi&quot;: [],
+    &quot;MPK_AAj&quot;: [&quot;b&quot;],
+    &quot;misc_vars&quot;: []
+}
+</code></pre>
+<p>In this case, the output of ACABELLA is: </p>
+<pre><code>[*] ACABELLA cmd tool
+
+
+[*] Analyzing scheme...
+
+
+
+[*] Decryption key attack results:
+
+         k0 : (alpha_i + r)/b
+         k1 : r
+         c0 : b*s
+         mpk0 : b
+
+Structure of CA/AAs:
+
+[!] No decryption attack found
+</code></pre>
+<p>We can also try the AA_extended corruption model. We'll suppose we obtain the <script type="math/tex">b_i</script> parameter of a corrupted authority <script type="math/tex">AA_i</script>, <script type="math/tex">b_2</script>. Then, we'll obtain ciphertext encodings from that authority too. The goal is to attack, using those encodings, a honest authority <script type="math/tex">AA_j</script>. We prepare the following input for ACABELLA:</p>
+<pre><code>{
+    &quot;scheme_id&quot;: &quot;cm14&quot;,
+    &quot;analysis&quot;: &quot;decryption&quot;,
+    &quot;k&quot;: [&quot;(alpha_i + r) / b&quot;, &quot;r&quot;],
+    &quot;c&quot;: [&quot;s * b&quot;, &quot;s * b2&quot;],
+    &quot;mpk&quot;: [&quot;b&quot;],
+    &quot;gp&quot;: [],
+    &quot;key&quot; : &quot;alpha_i * s&quot;,
+    &quot;unknown_vars&quot; :  [&quot;alpha_i&quot;, &quot;r&quot;, &quot;s&quot;, &quot;b&quot;],
+    &quot;corruption_model&quot;: &quot;AA_extended&quot;,
+    &quot;corruptable_vars&quot;: [
+        { &quot;type&quot;:&quot;MPK_AAi&quot;, &quot;var&quot;:&quot;b2&quot; }
+         ],
+    &quot;MPK_AAi&quot;: [&quot;b2&quot;],
+    &quot;MPK_AAj&quot;: [&quot;b&quot;],
+    &quot;misc_vars&quot;: []
+}
+</code></pre>
+<p>ACABELLA finds the following attack:</p>
+<pre><code>[*] ACABELLA cmd tool
+
+
+[*] Analyzing scheme...
+
+
+
+[*] Decryption key attack results:
+
+List of encodings:
+         k0[i]*c0 : s*(alpha_i + r)
+         k1[i]*c1 : b2*r*s
+         k1[i]*mpk1 : b2*r
+         c0*mpk1 : b*b2*s
+         c1*mpk0 : b*b2*s
+         k[i]0 : (alpha_i + r)/b
+         k[i]1 : r
+         c0 : b*s
+         c1 : b2*s
+         mpk0 : b
+         mpk1 : b2
+
+For the corruption of an attribute authority AA[i] where c0 and c1 are obtained from different attribute authorities.
+
+Structure of CA/AAs:
+        Master key pair of AA[i]: mpk[i]: [b2]
+        Master key pair of AA[j]: mpk[j]: [b]
+
+List of variables obtained via corruption:
+        b2 from MPK_AAi
+
+[*] Decryption attack found: 1*k0[i]*c0 + -1/b2*k1[i]*c1
+</code></pre>
+<h3 id="attacking-po17">Attacking PO17</h3>
+<p>The PO17 scheme [^2] is a MA-ABE scheme with a similar structure as CM14.
+It only consists of multiple attribute-authorities AA in a distributed
+fashion. </p>
+<ul>
+<li>
+<p>During <code>Setup</code>, every attribute authority generates <script type="math/tex">\alpha_i</script>, <script type="math/tex">\beta_i</script> and <script type="math/tex">t_{i_k}</script> (for every supported attribute <script type="math/tex">k \in_R Z_p</script> as the master secret key tuple MSK. The MPK of every authority consist then on <script type="math/tex">X_i = g^{\beta_i}</script> and <script type="math/tex">Y_i = e(g, g)^{\alpha_i}</script>.  Moreover, for every attribute <script type="math/tex">k</script>, an associated public key is generated as
+<script type="math/tex">T_{i, k} = g^{t_{i, k}}</script>. </p>
+</li>
+<li>
+<p>The key generation component that is attribute-independent is <script type="math/tex">SK_o^k = g^{\frac{\alpha_i - r_i}{\beta_i}}</script>.</p>
+</li>
+<li>
+<p>In the encryption process, the attribute-independent variables correspond to <script type="math/tex">g^{\beta_i \cdot s}</script>. </p>
+</li>
+</ul>
+<h4 id="obtaining-the-involved-encodings_1">Obtaining the involved encodings</h4>
+<p>We rename the key generation component <script type="math/tex">SK_o^k</script> as <script type="math/tex">\frac{\alpha_i - r}{b_i}</script> and we 
+add the corresponding encoding of <script type="math/tex">g^r</script>, <script type="math/tex">r</script>. From the ciphertext component, we rename it as <script type="math/tex">b_i \cdot s</script>. Finally, we also add the MPK corresponding to the attribute authority to the encoding list.</p>
+<h4 id="generating-inputs-for-acabella_1">Generating inputs for ACABELLA</h4>
+<p>We follow the same strategy as with the CM14 [^1] scheme, using the <code>AA_extended</code> corruption model. We create the following JSON input:</p>
+<pre><code>{
+    &quot;scheme_id&quot;: &quot;po17&quot;,
+    &quot;analysis&quot;: &quot;decryption&quot;,
+    &quot;k&quot;: [&quot;(alpha_i - r) / b&quot;, &quot;r&quot;],
+    &quot;c&quot;: [&quot;s * b&quot;, &quot;s * b2&quot;],
+    &quot;mpk&quot;: [&quot;b&quot;],
+    &quot;gp&quot;: [],
+    &quot;key&quot; : &quot;alpha_i * s&quot;,
+    &quot;unknown_vars&quot; :  [&quot;alpha_i&quot;, &quot;r&quot;, &quot;s&quot;, &quot;b&quot;],
+    &quot;corruption_model&quot;: &quot;AA_extended&quot;,
+    &quot;corruptable_vars&quot;: [
+        { &quot;type&quot;:&quot;MPK_AAi&quot;, &quot;var&quot;:&quot;b2&quot; }
+         ],
+    &quot;MPK_AAi&quot;: [&quot;b2&quot;],
+    &quot;MPK_AAj&quot;: [&quot;b&quot;],
+    &quot;misc_vars&quot;: []
+}
+</code></pre>
+<p>and ACABELLA finds the following decryption attack:</p>
+<pre><code>[*] ACABELLA cmd tool
+
+
+[*] Analyzing scheme...
+
+
+
+[*] Decryption key attack results:
+
+List of encodings:
+         k0[i]*c0 : s*(alpha_i - r)
+         k1[i]*c0 : b*r*s
+         k0[i]*mpk0 : alpha_i - r
+         k0[i]*mpk0 : alpha_i - r
+         k1[i]*mpk0 : b*r
+         k1[i]*mpk0 : b*r
+         c0*mpk0 : b**2*s
+         c0*mpk0 : b**2*s
+         k[i]0 : (alpha_i - r)/b
+         k[i]1 : r
+         c0 : b*s
+         mpk0 : b
+         mpk0 : b
+
+For the corruption of an attribute authority AA[i].
+
+Structure of CA/AAs:
+        Master key pair of AA[i]: mpk[i]: [b]
+
+List of variables obtained via corruption:
+        b from MPK_AAi
+
+[*] Decryption attack found: 1*k0[i]*c0 + 1/b*k1[i]*c0
+</code></pre>
+<h3 id="attacking-ndcw15">Attacking NDCW15</h3>
+<p>The NDCW15 scheme [^3] is a CP-ABE scheme with traceability capabilities to detect illegal key redistribution. </p>
+<p>During <code>Setup</code>, the master key of the system, <script type="math/tex">alpha_i</script> is generated as well  as the corresponding public keys of every attribute in the system and the rest of public parameters (<script type="math/tex">g^k</script> for instance is relevant to us as it appears in one of the attribute-independent ciphertext components).</p>
+<p>We are interested in the following key components, that are attribute-independent:</p>
+<ul>
+<li>
+<script type="math/tex">K = g^{\frac{\alpha}{a + T}} \cdot (g^t)^{\frac{r}{a + T}}</script>
+</li>
+</ul>
+<p>for <script type="math/tex">r \in_R Z_p^{*}</script> and <script type="math/tex">c \in_R Z_N</script>.</p>
+<ul>
+<li>
+<p>
+<script type="math/tex">L = g^c \cdot R_o</script>
+</p>
+</li>
+<li>
+<p>
+<script type="math/tex">L_p = g^{a\cdot c} \cdot Rp_o</script>
+</p>
+</li>
+</ul>
+<p>where <script type="math/tex">c</script> is known by the user as well as <script type="math/tex">T</script>.</p>
+<p>From <code>Encryption</code>, we are interested in the following ciphertext encodings:</p>
+<ul>
+<li>
+<script type="math/tex">C_0 = g^s</script>
+</li>
+<li>
+<script type="math/tex">C_1 = g^{a\cdot s}</script>
+</li>
+<li>
+<script type="math/tex">C_2 = g^{k \cdot s}</script>
+</li>
+</ul>
+<p>The user knows the following variables <script type="math/tex">c</script> (sent by the authority), <script type="math/tex">t</script> (generated by the user) and <script type="math/tex">T</script>, that is part of one attribute-independent component of the key.</p>
+<h4 id="obtaining-the-involved-encodings_2">Obtaining the involved encodings</h4>
+<p>We rename the known variables by the user as <script type="math/tex">x_i</script> variables:</p>
+<ul>
+<li>
+<script type="math/tex">c</script> becomes <script type="math/tex">x_1</script>
+</li>
+<li>
+<script type="math/tex">t</script> becomes <script type="math/tex">x_2</script>
+</li>
+<li>
+<script type="math/tex">T</script> becomes <script type="math/tex">T</script>
+</li>
+</ul>
+<p>The global parameters are renamed as:</p>
+<ul>
+<li>
+<script type="math/tex">a</script> becomes <script type="math/tex">b_1</script>
+</li>
+<li>
+<script type="math/tex">k</script> becomes <script type="math/tex">b_2</script>
+</li>
+</ul>
+<p>Now, the corresponding key encodings are:</p>
+<ul>
+<li>
+<script type="math/tex">\frac{\alpha + x_2 \cdot b_2}{b_1 + x_3}</script>
+</li>
+<li>
+<script type="math/tex">b_1 \cdot x_1</script>
+</li>
+</ul>
+<p>And the corresponding ciphertext encodings are:</p>
+<ul>
+<li>
+<script type="math/tex">s</script>
+</li>
+<li>
+<script type="math/tex">b_1 \cdot s</script>
+</li>
+<li>
+<script type="math/tex">b_2 \cdot s</script>
+</li>
+</ul>
+<h4 id="generating-inputs-for-acabella_2">Generating inputs for ACABELLA</h4>
+<p>If we try a decryption attack without corruptin with the following input:</p>
+<pre><code>{
+    &quot;scheme_id&quot;: &quot;ndcw15&quot;,
+    &quot;analysis&quot;: &quot;decryption&quot;,
+    &quot;k&quot;: [&quot;alpha * (1 / (b1 + x3)) + x2 * b2 * (1 / (b1 + x3))&quot;, &quot;x1&quot;, &quot;x1 * b1&quot;],
+    &quot;c&quot;: [&quot;s&quot;, &quot;s * b1&quot;, &quot;s * b2&quot;],
+    &quot;mpk&quot;: [],
+    &quot;gp&quot;: [&quot;b1&quot;, &quot;b2&quot;, &quot;1&quot;],
+    &quot;key&quot; : &quot;alpha * s&quot;,
+    &quot;unknown_vars&quot; :  [&quot;alpha&quot;, &quot;b1&quot;, &quot;b2&quot;, &quot;s&quot;],
+    &quot;corruption_model&quot;: &quot;NoCorruption&quot;,
+    &quot;corruptable_vars&quot;: [],
+    &quot;MPK_AAi&quot;: [],
+    &quot;MPK_AAj&quot;: [],
+    &quot;misc_vars&quot;: []
+}
+</code></pre>
+<p>ACABELLA finds a decryption attack:</p>
+<pre><code>[*] ACABELLA cmd tool
+
+
+[*] Analyzing scheme...
+
+
+
+[*] Decryption key attack results:
+
+List of encodings:
+         k0*c0 : s*(alpha/(b1 + x3) + b2*x2/(b1 + x3))
+         k0*c1 : b1*s*(alpha/(b1 + x3) + b2*x2/(b1 + x3))
+         k1*c0 : s*x1
+         k1*c1 : b1*s*x1
+         k1*c2 : b2*s*x1
+         k2*c0 : b1*s*x1
+         k2*c1 : b1**2*s*x1
+         k2*c2 : b1*b2*s*x1
+         c0*gp0 : b1*s
+         c0*gp1 : b2*s
+         c0*gp2 : s
+         c1*gp0 : b1**2*s
+         c1*gp1 : b1*b2*s
+         c1*gp2 : b1*s
+         c2*gp0 : b1*b2*s
+         c2*gp2 : b2*s
+         k1*gp0 : b1*x1
+         k1*gp1 : b2*x1
+         k2*gp2 : b1*x1
+         k0 : alpha/(b1 + x3) + b2*x2/(b1 + x3)
+         k1 : x1
+         k2 : b1*x1
+         c0 : s
+         c1 : b1*s
+         c2 : b2*s
+         gp0 : b1
+         gp1 : b2
+         gp2 : 1
+
+[*] Decryption attack found: k0*c0*x3 + 1*k0*c1 + -x2/x1*k1*c2
+</code></pre>
+<h3 id="attacking-yj14">Attacking YJ14</h3>
+<p>The YJ14 scheme [^4] is a MA-ABE scheme that uses one central authority and several attribute authorities. The CA runs the Setup algorithm and registers users and AAs. The AAs are independents and generate attribute public and secret keys as well as revoke attributes. The scheme is cloud-centered and also consists of a cloud server, data owners (those who encrypt and store ciphertextexts in the cloud) as well as data consumers (or users, those who decrypt ciphertexts if they can fulfill an access policy).</p>
+<p>During Setup, the CA generates  global master key comprised of <script type="math/tex">a</script>, <script type="math/tex">b \in_R Z_p</script>. It also publishes the global system parameters tuple, consisting of <script type="math/tex">g</script>, <script type="math/tex">g^a</script>, <script type="math/tex">g^b</script> and the hash function <script type="math/tex">H</script>. During the user registration functionality, the CA generates <script type="math/tex">u_{uid}</script> and <script type="math/tex">up_{uid} \in_R Z_p</script> and generates the following keys:</p>
+<ul>
+<li>
+<script type="math/tex">GSK_{uid} = u_{uid}</script>
+</li>
+<li>
+<script type="math/tex">GSKp_{uid} = up_{uid}</script>
+</li>
+<li>
+<script type="math/tex">GPK_{uid} = g^{u_{uid}}</script>
+</li>
+<li>
+<script type="math/tex">GPKp_{uid} = g^{up_{uid}}</script>
+</li>
+</ul>
+<p>It sends to the user <script type="math/tex">GPK_{uid}</script>, <script type="math/tex">GSKp_{uid}</script> and a certificate.</p>
+<p>It also generates an identifier, aid to every AA involved in the system.</p>
+<p>Each <script type="math/tex">AA_i</script> generates the parameters: <script type="math/tex">\alpha_i</script>, <script type="math/tex">\beta_i</script> and <script type="math/tex">\gamma_i \in_R Z_p</script>.
+The AA public key consists of <script type="math/tex">e(g, g)^{\alpha_i}</script>, <script type="math/tex">g^{\beta_i}</script> and <script type="math/tex">g^{\frac{1}{\beta_i}}</script>.</p>
+<p>We are interested in the following key encodings, which are attribute-independent:</p>
+<ul>
+<li>
+<script type="math/tex">K_0 = g^{\alpha_i} \cdot g^{a \cdot u_{uid}} \cdot g^{b \cdot t_{uid}}</script>
+</li>
+<li>
+<script type="math/tex">K_1 = g^{t_{uid}}</script>
+</li>
+</ul>
+<p>where <script type="math/tex">t_{uid, aid}</script> is generated <script type="math/tex">\in_R Z_p</script>.</p>
+<p>Finally, we are interested in the following ciphertext encodings (which are attribute-independent):</p>
+<ul>
+<li>
+<script type="math/tex">C_p = g^s</script>
+</li>
+<li>
+<script type="math/tex">C_{pp} = g^{b \cdot s}</script>
+</li>
+</ul>
+<h4 id="obtaining-the-involved-encodings_3">Obtaining the involved encodings</h4>
+<ul>
+<li>We identify the <script type="math/tex">a</script> and <script type="math/tex">b</script> encodings that are part of the global parameters. We rename <script type="math/tex">a</script> to <script type="math/tex">b</script> and <script type="math/tex">b</script> to <script type="math/tex">b_p</script>.</li>
+<li>The user secret key, <script type="math/tex">u_{uid}</script> parameter, is renamed it as <script type="math/tex">x</script>. This parameter is kept secret and distributed in the attribute authorities.</li>
+<li>The key encodings are then <script type="math/tex">\alpha_i + b\cdot x + b_p\cdot r</script> and <script type="math/tex">r</script>.</li>
+<li>The ciphertext encodings are <script type="math/tex">s</script> and <script type="math/tex">b_p\cdot s</script>.</li>
+<li>The unkown variables in this case are <code>["alpha_i", "b", "bp", "r", "s", "x"]</code>.</li>
+</ul>
+<h4 id="generating-inputs-for-acabella_3">Generating inputs for ACABELLA</h4>
+<p>Given the identified encodings, we can try to find a decryption attack with the following input:</p>
+<pre><code class="language-json">{
+    &quot;scheme_id&quot;: &quot;yj14&quot;,
+    &quot;analysis&quot;: &quot;decryption&quot;,
+    &quot;k&quot;: [&quot;alpha_i + x * b + r * bp&quot;, &quot;r&quot;],
+    &quot;c&quot;: [&quot;s&quot;, &quot;s * bp&quot;],
+    &quot;mpk&quot;: [&quot;b&quot;, &quot;bp&quot;],
+    &quot;gp&quot;: [],
+    &quot;key&quot; : &quot;alpha_i * s&quot;,
+    &quot;unknown_vars&quot; :  [&quot;alpha_i&quot;, &quot;b&quot;, &quot;bp&quot;, &quot;r&quot;, &quot;s&quot;, &quot;x&quot;],
+    &quot;corruption_model&quot;: &quot;NoCorruption&quot;,
+    &quot;corruptable_vars&quot;: [],    
+    &quot;MPK_AAi&quot;: [&quot;alpha_i&quot;, &quot;x&quot;],
+    &quot;MPK_AAj&quot;: [],
+    &quot;misc_vars&quot;: [&quot;x&quot;]
+}
+</code></pre>
+<p>However, ACABELLA doesn't find an attack:</p>
+<pre><code>[*] ACABELLA cmd tool
+
+
+[*] Analyzing scheme...
+
+
+
+[*] Decryption key attack results:
+
+List of encodings:
+         k1*c1 : bp*r*s
+         k0 : alpha_i + b*x + bp*r
+         k1 : r
+         c0 : s
+         c1 : bp*s
+         mpk0 : b
+         mpk1 : bp
+
+Structure of CA/AAs:
+
+[!] No decryption attack found
+</code></pre>
+<p>Every attribute authority in the system contains the user secret key <script type="math/tex">u_{uid}</script>. It could be that having this parameter could enable a decryption attack. In order to check that, we can corrupt an <script type="math/tex">AA_i</script>, obtain <script type="math/tex">x</script> and then launch an attack against an honest authority <script type="math/tex">AA_j</script>. In this case, we'll use the <code>AA</code> corruption model (there is no CA involved), and we'll obtain the variable <script type="math/tex">x</script> from a corrupted authority:</p>
+<pre><code class="language-json">{
+    &quot;scheme_id&quot;: &quot;yj14&quot;,
+    &quot;analysis&quot;: &quot;decryption&quot;,
+    &quot;k&quot;: [&quot;alpha_i + x * b + r * bp&quot;, &quot;r&quot;],
+    &quot;c&quot;: [&quot;s&quot;, &quot;s * bp&quot;],
+    &quot;mpk&quot;: [&quot;b&quot;, &quot;bp&quot;],
+    &quot;gp&quot;: [],
+    &quot;key&quot; : &quot;alpha_i * s&quot;,
+    &quot;unknown_vars&quot; :  [&quot;alpha_i&quot;, &quot;b&quot;, &quot;bp&quot;, &quot;r&quot;, &quot;s&quot;, &quot;x&quot;],
+    &quot;corruption_model&quot;: &quot;AA&quot;,
+    &quot;corruptable_vars&quot;: [
+        { &quot;type&quot;:&quot;misc&quot;, &quot;var&quot;:&quot;x&quot; }
+         ],    
+    &quot;MPK_AAi&quot;: [&quot;alpha_i&quot;, &quot;x&quot;],
+    &quot;MPK_AAj&quot;: [],
+    &quot;misc_vars&quot;: [&quot;x&quot;]
+}
+</code></pre>
+<p>In this case, ACABELLA shows us how to perform a decryption attack:</p>
+<pre><code class="language-bash">[*] ACABELLA cmd tool
+
+
+[*] Analyzing scheme...
+
+
+
+[*] Decryption key attack results:
+
+List of encodings:
+         k0[i]*c0 : s*(alpha_i + b*x + bp*r)
+         k1[i]*c1 : bp*r*s
+         c0*mpk0 : b*s
+         c1*mpk0 : b*bp*s
+         k[i]0 : alpha_i + b*x + bp*r
+         k[i]1 : r
+         c0 : s
+         c1 : bp*s
+         mpk0 : b
+         mpk1 : bp
+
+For the corruption of an attribute authority AA[i].
+
+Structure of CA/AAs:
+        Master key pair of AA[i]: mpk[i]: [alpha_i, x]
+
+List of variables obtained via corruption:
+        x from AAi
+
+[*] Decryption attack found: 1*k0[i]*c0 + -1*k1[i]*c1 + -x*c0*mpk0
+</code></pre>
+<h3 id="attacking-yjr13">Attacking YJR13</h3>
+<p>The YJR13 scheme [^5] is a multi-authority scheme that uses a CA and several attribute authorities. The problem of this scheme, as we'll see is that the user knows two exponents that enable it to perform a decryption attack without the need of corruption.</p>
+<ul>
+<li>The CA, during <code>Setup</code>, generates <script type="math/tex">a \in_R Z_p</script> as master key and publshes <script type="math/tex">g^a</script> as part of the system parameters.</li>
+<li>During the user registration, the CA generates <script type="math/tex">GPK_{uid} = g^{u_{uid}}</script> and <script type="math/tex">GSK_{uid} = z_{uid}</script> via <script type="math/tex">u_{uid}</script> and <script type="math/tex">z_{uid} \in_R Z_p</script>. In this scheme, the user knows <script type="math/tex">z_{uid}</script> a well as its uid (used as <script type="math/tex">u_i</script> in the scheme).</li>
+<li>The AAs, during <code>Setup</code>, generate <script type="math/tex">\alpha_i</script>, <script type="math/tex">\beta_i</script> and <script type="math/tex">\gamma_i \in_R Z_p</script> as secret key and publish as public key: <script type="math/tex">e(g, g)^{\alpha_i}</script>, <script type="math/tex">g^{\frac{1}{\beta_i}}</script>, <script type="math/tex">g^{\frac{\gamma_i}{\beta_i}}</script>.</li>
+<li>During key generation, the followign attribute-independent components are generated: <script type="math/tex">K_i = g^{\frac{\alpha_i}{z_j}}\cdot g^{a\cdot u_i}\cdot g^{\frac{a}{\beta_i}\cdot t_i}</script>, <script type="math/tex">L_i = g^{\frac{\beta_i}{z_i}\cdot t_i}</script> and <script type="math/tex">R_i = g^{a\cdot t_i}</script>
+for <script type="math/tex">t_i \in_R Z_p</script>.</li>
+<li>We are interested in the following attribute-independent components generated during encryption: <script type="math/tex">C_p = g^s</script> and <script type="math/tex">C_{pp} = g^{\frac{s}{\beta_i}}</script>.</li>
+</ul>
+<h4 id="obtaining-the-involved-encodings_4">Obtaining the involved encodings</h4>
+<ul>
+<li>We know that the user has <script type="math/tex">z_i</script>, that we rename as <script type="math/tex">x_1</script> and <script type="math/tex">u_i</script>, renamed as <script type="math/tex">x_2</script>.</li>
+<li>The random exponent <script type="math/tex">t_i</script> is renamed as <script type="math/tex">r_i</script>.</li>
+<li>The key encodings are then: <script type="math/tex">\frac{\alpha_i}{x_1} + b\cdot x_2 + \frac{b}{b_i}\cdot r</script>, <script type="math/tex">\frac{b_i}{r}</script> and <script type="math/tex">b\cdot r</script>.</li>
+<li>The global parameter <script type="math/tex">a</script>, generated by the CA is also involved in our analysis and we rename it as <script type="math/tex">b</script>.</li>
+<li>The MPK triple of every attribute authority i consists of <script type="math/tex">\alpha_i</script>, <script type="math/tex">\beta_i</script> (renamed as <script type="math/tex">b_i</script>) and <script type="math/tex">\gamma_i</script>, renamed as <script type="math/tex">b_{pp}</script>.</li>
+<li>The ciphertex-related encodings are <script type="math/tex">s</script> and <script type="math/tex">\frac{s}{b_i}</script>.</li>
+</ul>
+<h4 id="generating-inputs-for-acabella_4">Generating inputs for ACABELLA</h4>
+<p>Since the user knows already two exponents in the scheme, we can try to find an attack without corruption using the following input:</p>
+<pre><code class="language-json">{
+    &quot;scheme_id&quot;: &quot;yjr13&quot;,
+    &quot;analysis&quot;: &quot;decryption&quot;,
+    &quot;k&quot;: [&quot;alpha_i * (1 / x1) + x2 * b + r * (b / bp)&quot;, &quot;r * bp * (1 / x1)&quot;, &quot;r*b&quot;],
+    &quot;c&quot;: [&quot;s&quot;, &quot;s / bp&quot;],
+    &quot;mpk&quot;: [&quot;bp&quot;],
+    &quot;gp&quot;: [&quot;b&quot;],
+    &quot;key&quot; : &quot;alpha_i * s&quot;,
+    &quot;unknown_vars&quot; :  [&quot;alpha_i&quot;, &quot;r&quot;, &quot;s&quot;, &quot;b&quot;, &quot;bp&quot;],
+    &quot;corruption_model&quot;: &quot;NoCorruption&quot;,
+    &quot;corruptable_vars&quot;: [],    
+    &quot;MPK_AAi&quot;: [&quot;alpha_i&quot;, &quot;bp&quot;],
+    &quot;MPK_AAj&quot;: [],
+    &quot;misc_vars&quot;: [&quot;x1&quot;, &quot;x2&quot;]
+}
+</code></pre>
+<p>ACABELLA finds the following attack:</p>
+<pre><code>[*] ACABELLA cmd tool
+
+
+[*] Analyzing scheme...
+
+
+
+[*] Decryption key attack results:
+
+List of encodings:
+         k0*c0 : s*(alpha_i/x1 + b*x2 + b*r/bp)
+         k2*c1 : b*r*s/bp
+         k2*mpk0 : b*bp*r
+         c0*gp0 : b*s
+         c1*gp0 : b*s/bp
+         k1*gp0 : b*bp*r/x1
+         k0 : alpha_i/x1 + b*x2 + b*r/bp
+         k1 : bp*r/x1
+         k2 : b*r
+         c0 : s
+         c1 : s/bp
+         mpk0 : bp
+         gp0 : b
+
+Structure of CA/AAs:
+
+[*] Decryption attack found: k0*c0*x1 + -x1*k2*c1 + -x1*x2*c0*gp0
+</code></pre>
+<h2 id="advice-on-finding-decryption-attacks">Advice on finding decryption attacks</h2>
+<ul>
+<li>Sometimes, it is possible to corrupt an attribute authority and obtain a variable, that, together
+with an ciphertext component from the same attribute, allow us to attack an honest attribute authority.
+See for instance the attack against the CM14 and PO17 schemes.</li>
+</ul>
+<h1 id="references">References</h1>
+<p>[^1]: Jianwei Chen and Huadong Ma. Efficient decentralized attribute-based access control for cloud storage with user revocation. In <em>2014 IEEE International Conference on Communications, ICC 2014</em>, 3782&ndash;3787. 06 2014. <a href="https://doi.org/10.1109/ICC.2014.6883910">doi:10.1109/ICC.2014.6883910</a>.
+[^2]: Harsha S. Gardiyawasam Pussewalage and Vladimir A. Oleshchuk. A distributed multi-authority attribute based encryption scheme for secure sharing of personal health records. In <em>Proceedings of the 22nd ACM on Symposium on Access Control Models and Technologies</em>, SACMAT '17 Abstracts, 255–262. New York, NY, USA, 2017. Association for Computing Machinery. URL: <a href="https://doi.org/10.1145/3078861.3078880">https://doi.org/10.1145/3078861.3078880</a>, <a href="https://doi.org/10.1145/3078861.3078880">doi:10.1145/3078861.3078880</a>.
+[^3]: Jianting Ning, Xiaolei Dong, Zhenfu Cao, and Lifei Wei. Accountable authority ciphertext-policy attribute-based encryption with white-box traceability and public auditing in the cloud. In <em>European Symposium on Research in Computer Security</em>, 270–289. Springer, 2015.
+[^4]: Kan Yang and Xiaohua Jia. Expressive, efficient, and revocable data access control for multi-authority cloud storage. <em>Parallel and Distributed Systems, IEEE Transactions on</em>, 25:1735&ndash;1744, 07 2014. <a href="https://doi.org/10.1109/TPDS.2013.253">doi:10.1109/TPDS.2013.253</a>.
+[^5]: Kan Yang, Xiaohua Jia, Kui Ren, Bo Zhang, and Ruitao Xie. DAC-MACS: effective data access control for multiauthority cloud storage systems. <em>IEEE Trans. Inf. Forensics Secur.</em>, 8(11):1790–1801, 2013. URL: <a href="https://doi.org/10.1109/TIFS.2013.2279531">https://doi.org/10.1109/TIFS.2013.2279531</a>, <a href="https://doi.org/10.1109/TIFS.2013.2279531">doi:10.1109/TIFS.2013.2279531</a>.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+      
+    
+  </body>
+</html>

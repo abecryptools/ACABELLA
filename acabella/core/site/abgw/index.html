@@ -1,0 +1,554 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../json/">
+      
+      
+        <link rel="next" href="../reference/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.19">
+    
+    
+      
+        <title>Bridge to the ABGW17 analyzer - ACABELLA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bridge-to-the-abgw17-analyzer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ACABELLA" class="md-header__button md-logo" aria-label="ACABELLA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ACABELLA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bridge to the ABGW17 analyzer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ACABELLA" class="md-nav__button md-logo" aria-label="ACABELLA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ACABELLA
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ac17/" class="md-nav__link">
+        Security analysis
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../master/" class="md-nav__link">
+        Finding master key attacks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../decryption/" class="md-nav__link">
+        Finding decryption attacks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../corruption/" class="md-nav__link">
+        Utilization of corruption
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        Tools
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../json/" class="md-nav__link">
+        JSON description
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Bridge to the ABGW17 analyzer
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        Reference API
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="bridge-to-the-abgw17-analyzer">Bridge to the ABGW17 analyzer</h1>
+<p>In [ABGW17], the authors provided a tool for analyzing the security
+of ABE schemes within the context of the group generic model. In ACABELLA,
+we provide a bridge to obtain an output that can be analyzed with the ABGW tool.</p>
+<p>The bridge is composed of two modules:</p>
+<ol>
+<li>A command line tool: Located at <code>tools/abgw_bridge</code>, it receives a description
+of an ABE scheme written in JSON, for instance, for the YJR13 scheme:</li>
+</ol>
+<pre><code class="language-json">{
+    &quot;scheme_id&quot;: &quot;yjr13&quot;,
+    &quot;analysis&quot;: &quot;abgw&quot;,
+    &quot;k&quot;: [&quot;a * (1 / x1) + x2 * b + r * (b / bp)&quot;, &quot;r * bp * (1 / x1)&quot;, &quot;r * b&quot;],
+    &quot;c&quot;: [&quot;s&quot;, &quot;s / bp&quot;],
+    &quot;mpk&quot;: [&quot;bp&quot;],
+    &quot;gp&quot;: [&quot;b&quot;],
+    &quot;key&quot; : &quot;a * s&quot;,
+    &quot;unknown_vars&quot; :  [&quot;a&quot;, &quot;r&quot;, &quot;s&quot;, &quot;b&quot;, &quot;bp&quot;],
+    &quot;known_vars&quot; : [&quot;x1&quot;, &quot;x2&quot;]
+}
+</code></pre>
+<p>It can be used to obtain the corresponding input for ABGW, for instance:</p>
+<pre><code class="language-bash">$ python abgw_bridge_cmd.py example.json 
+[*] ABGW bridge cmd tool
+[!] Processing example.json
+
+params c1,c2,c3,c4,c5,c6 in Zp.
+vars a,r,s,b,bp in Zp.
+params x1,x2 in Zp.
+
+
+c1*(a*s/x1 + b*s*x2 + b*r*s/bp) +
+c2*(a*s/(bp*x1) + b*s*x2/bp + b*r*s/bp*bp) +
+c3*(bp*r*s/x1) +
+c4*(r*s/x1) +
+c5*(b*r*s) +
+c6*(b*r*s/bp)
+= a * s.
+
+go.
+</code></pre>
+<ol>
+<li>A dockerized version of the ABGW tool. Located at <code>tools/abgw_docker</code>, it invokes the ABGW tool with ABE schemes defined in the <code>solver_inputs</code> directory.
+Note that the <code>build_and_run.sh</code> script compiles the image defined in the docker file and launch a container image where ABGW is executed.</li>
+</ol>
+<p>For instance:</p>
+<pre><code class="language-bash">$ ./build_and_run.sh               
+Sending build context to Docker daemon  48.13kB
+Step 1/27 : FROM ubuntu:16.04
+ ---&gt; b6f507652425
+Step 2/27 : RUN apt update -y
+ ---&gt; Using cache
+ ---&gt; 1688783f3dcc
+Step 3/27 : RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+ ---&gt; Using cache
+ ---&gt; 0dbe43f37870
+Step 4/27 : RUN apt-get install -y tzdata
+ ---&gt; Using cache
+ ---&gt; e3f3790737f4
+Step 5/27 : RUN dpkg-reconfigure --frontend noninteractive tzdata
+ ---&gt; Using cache
+ ---&gt; e6d34b8176ad
+Step 6/27 : RUN apt-get --assume-yes install software-properties-common
+ ---&gt; Using cache
+ ---&gt; 9ed00e1180b3
+Step 7/27 : RUN echo &quot;export GGM_PATH=/root/ggm-symbolic-solver&quot; &gt;&gt; /etc/bash.bashrc
+ ---&gt; Using cache
+ ---&gt; c09a02d4d6f1
+Step 8/27 : RUN apt install git vim build-essential sudo python3-dev wget flex bison python3-pip libssl-dev libgmp10 libgmp-dev git openssl -y
+ ---&gt; Using cache
+ ---&gt; 0107f2df09fb
+Step 9/27 : RUN apt-get install -y curl ocaml ocaml-native-compilers opam libtool libtool-bin libgmp-dev libffi-dev m4 libz-dev libssl-dev camlp4-extra
+ ---&gt; Using cache
+ ---&gt; 629689e6d19b
+Step 10/27 : WORKDIR /root
+ ---&gt; Using cache
+ ---&gt; d79f0bee8e6f
+Step 11/27 : RUN git clone https://github.com/miguel-ambrona/ggm-symbolic-solver
+ ---&gt; Using cache
+ ---&gt; 1a87191dcd28
+Step 12/27 : WORKDIR /root/ggm-symbolic-solver
+ ---&gt; Using cache
+ ---&gt; d9117f162a43
+Step 13/27 : RUN opam init --yes
+ ---&gt; Using cache
+ ---&gt; ea83d8958f44
+Step 14/27 : RUN eval `opam config env`
+ ---&gt; Using cache
+ ---&gt; 3744bac4bc53
+Step 15/27 : RUN opam pin add symbolic-solver . -n --yes
+ ---&gt; Using cache
+ ---&gt; 57ee5bb1a57a
+Step 16/27 : RUN opam install symbolic-solver --deps-only --yes
+ ---&gt; Using cache
+ ---&gt; d151dd1a053f
+Step 17/27 : RUN export GGM_PATH=/root/ggm-symbolic-solver/
+ ---&gt; Using cache
+ ---&gt; fc1963909dd5
+Step 18/27 : RUN apt-add-repository -y ppa:aims/sagemath
+ ---&gt; Using cache
+ ---&gt; d74a3b71a915
+Step 19/27 : RUN apt-get update -y
+ ---&gt; Using cache
+ ---&gt; e66d9de8839d
+Step 20/27 : RUN apt-get --assume-yes install sagemath-upstream-binary
+ ---&gt; Using cache
+ ---&gt; 0dc912223b53
+Step 21/27 : COPY ggm_setup.sh/ .
+ ---&gt; Using cache
+ ---&gt; 54581c89d3eb
+Step 22/27 : RUN chmod +x ggm_setup.sh
+ ---&gt; Using cache
+ ---&gt; 99be81b5d1b0
+Step 23/27 : RUN ./ggm_setup.sh
+ ---&gt; Using cache
+ ---&gt; 2caff98e273d
+Step 24/27 : RUN rm -rf examples/*
+ ---&gt; Using cache
+ ---&gt; ff8f9b8c477b
+Step 25/27 : COPY solver_inputs/* examples/
+ ---&gt; Using cache
+ ---&gt; 4df8886f035e
+Step 26/27 : COPY changes/* .
+ ---&gt; Using cache
+ ---&gt; c62e8b35a2c7
+Step 27/27 : CMD [&quot;/bin/bash&quot;]
+ ---&gt; Using cache
+ ---&gt; eb18b1849e3d
+Successfully built eb18b1849e3d
+Successfully tagged abeattacks:latest
+
+
+[*] Now run run_examples.py
+
+root@5f232cb06e7c:~/ggm-symbolic-solver# 
+root@5f232cb06e7c:~/ggm-symbolic-solver# ./run_examples.py 
+
+Initialized solver!
+
+./examples/cp_abe_ndcw15.ggm  Complete output:
+\begin{aligned} &amp; \text{sets:} &amp;&amp; \emptyset\\ &amp; \text{parameters:} &amp;&amp; \color{#ccee77}{d_{1}}, \color{#ccee77}{d_{2}}, \color{#ccee77}{d_{3}}, \color{#ccee77}{c_{1}}, \color{#ccee77}{c_{2}}, \color{#ccee77}{c_{3}}, \color{#ccee77}{c_{4}}, \color{#ccee77}{c_{5}}, \color{#ccee77}{c_{6}}, \color{#ccee77}{c_{7}}, \color{#ccee77}{c_{8}}, \color{#ccee77}{c_{9}}, \color{#ccee77}{c_{10}}, \color{#ccee77}{c_{11}}, \color{#ccee77}{c_{12}} \in \mathbb{Z}_p^{} \\  &amp; \text{variables:} &amp;&amp; \color{#dd83f9}{a}, \color{#dd83f9}{b_{1}}, \color{#dd83f9}{b_{2}}, \color{#dd83f9}{s} \in \mathbb{Z}_p^{} \\  \\ &amp; \text{goal }1 \text{ out of } 1 \end{aligned}@\begin{aligned}(1) \  &amp; \color{#ccee77}{c_{4}}\color{#ccee77}{d_{1}} +  6  \ \color{#ccee77}{d_{3}}\color{#ccee77}{c_{5}}\color{#ccee77}{d_{1}} +  6  \ \color{#ccee77}{d_{3}}\color{#ccee77}{c_{7}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (2) \  &amp;  6  \ \color{#ccee77}{d_{3}}\color{#ccee77}{c_{4}}\color{#ccee77}{d_{1}} +  15  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{5}}\color{#ccee77}{d_{1}} +  15  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{7}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (3) \  &amp;  15  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{4}}\color{#ccee77}{d_{1}} +  20  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{5}}\color{#ccee77}{d_{1}} +  20  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{7}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (4) \  &amp;  20  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{4}}\color{#ccee77}{d_{1}} +  15  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{5}}\color{#ccee77}{d_{1}} +  15  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{7}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (5) \  &amp;  15  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{4}}\color{#ccee77}{d_{1}} +  6  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{5}}\color{#ccee77}{d_{1}} +  6  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{7}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (6) \  &amp;  6  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{4}}\color{#ccee77}{d_{1}} + \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{5}}\color{#ccee77}{d_{1}} + \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{7}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (7) \  &amp; \color{#ccee77}{c_{5}}\color{#ccee77}{d_{1}} + \color{#ccee77}{c_{7}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (8) \  &amp; \color{#ccee77}{c_{8}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (9) \  &amp; \color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (10) \  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (11) \  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (12) \  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (13) \  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (14) \  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{4}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (15) \  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}=0&amp; &amp; \land \\ (16) \  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}=0&amp; &amp; \land \\ (17) \  &amp; \color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}} +  6  \ \color{#ccee77}{d_{3}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}} +  15  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}} +  20  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}} +  15  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#dd83f9}{b_{1}}\color{#dd83f9}{b_{1}} +  6  \ \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#dd83f9}{b_{1}} + \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\neq0 \\  &amp; &amp; \\  &amp; \color{#ccee77}{c_{1}}\mapsto \color{#ccee77}{d_{3}} &amp; &amp; \\  &amp; \color{#ccee77}{c_{2}}\mapsto  1  &amp; &amp; \\  &amp; \color{#ccee77}{d_{2}}\mapsto \left( -1 \right)\color{#ccee77}{c_{6}}\color{#ccee77}{d_{1}} + \left( -6 \right)\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}} &amp; &amp; \\  &amp; \color{#ccee77}{c_{3}}\mapsto 0 \\  &amp; &amp; \\  &amp; \color{#ccee77}{c_{8}}\color{#ccee77}{d_{1}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{4}}\color{#ccee77}{d_{1}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{c_{9}}\color{#ccee77}{d_{1}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\color{#ccee77}{d_{3}}\mapsto 0\end{aligned}
+
+Not proven        Time: 2.043
+./examples/cp_abe_yjr13.ggm   Complete output:
+\begin{aligned} &amp; \text{sets:} &amp;&amp; \emptyset\\ &amp; \text{parameters:} &amp;&amp; \color{#ccee77}{c_{1}}, \color{#ccee77}{c_{2}}, \color{#ccee77}{c_{3}}, \color{#ccee77}{c_{4}}, \color{#ccee77}{c_{5}}, \color{#ccee77}{c_{6}}, \color{#ccee77}{x_{1}}, \color{#ccee77}{x_{2}} \in \mathbb{Z}_p^{} \\  &amp; \text{variables:} &amp;&amp; \color{#dd83f9}{a}, \color{#dd83f9}{r}, \color{#dd83f9}{s}, \color{#dd83f9}{b}, \color{#dd83f9}{bp} \in \mathbb{Z}_p^{} \\  \\ &amp; \text{goal }1 \text{ out of } 1 \end{aligned}@\begin{aligned}(1) \  &amp; \color{#ccee77}{c_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}} + \left( -1 \right)\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}=0&amp; &amp; \land \\ (2) \  &amp; \color{#ccee77}{x_{1}}\color{#ccee77}{c_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}} + \color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{c_{6}}=0&amp; &amp; \land \\ (3) \  &amp; \color{#ccee77}{c_{2}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}=0&amp; &amp; \land \\ (4) \  &amp; \color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{c_{3}}\color{#ccee77}{x_{1}}=0&amp; &amp; \land \\ (5) \  &amp; \color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{c_{4}}=0&amp; &amp; \land \\ (6) \  &amp; \color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{c_{5}}=0&amp; &amp; \land \\ (7) \  &amp; \color{#ccee77}{c_{2}}\color{#ccee77}{x_{2}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}=0&amp; &amp; \land \\ (8) \  &amp; \color{#ccee77}{x_{1}}\color{#ccee77}{c_{1}}\color{#ccee77}{x_{2}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}=0&amp; &amp; \land \\ (9) \  &amp; \color{#ccee77}{x_{1}}\neq0&amp; &amp; \land \\ (10) \  &amp; \color{#dd83f9}{bp}\neq0 \\  \\  &amp; &amp; \\  &amp; \color{#ccee77}{c_{2}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{c_{3}}\color{#ccee77}{x_{1}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{c_{4}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{c_{5}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{c_{2}}\color{#ccee77}{x_{2}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\mapsto 0 &amp; &amp; \\  &amp; \color{#ccee77}{x_{1}}\color{#ccee77}{c_{1}}\color{#ccee77}{x_{2}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\color{#ccee77}{x_{1}}\mapsto 0\end{aligned}
+
+Not proven        Time: 0.037
+root@5f232cb06e7c:~/ggm-symbolic-solver# 
+</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
+      
+    
+  </body>
+</html>

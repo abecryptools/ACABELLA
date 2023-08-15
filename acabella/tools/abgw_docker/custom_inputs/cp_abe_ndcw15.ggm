@@ -1,0 +1,17 @@
+
+params d1,d2,d3 in Zp.
+params c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12 in Zp.
+vars a,b1,b2,s in Zp.
+
+c1*((a + d2*b2) / (b1 + d3))*s +
+c2*((a + d2*b2) / (b1 + d3))*s*b1 +
+c3*((a + d2*b2) / (b1 + d3))*s*b2 +
+c4*(d1)*s +
+c5*(d1)*s*b1 +
+c6*(d1)*s*b2 +
+c7*(d1*b1)*s +
+c8*(d1*b1)*s*b1 +
+c9*(d1*b1)*s*b2 
+= a * s.
+
+go.

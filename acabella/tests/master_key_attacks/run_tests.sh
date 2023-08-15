@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pytest -sv
+

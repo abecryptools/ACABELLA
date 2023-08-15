@@ -1,0 +1,115 @@
+
+params x1,x2 in Zp.
+params m1,m2,m3,m4 in Zp.
+params c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18 in Zp.
+params c19,c20,c21,c22,c23,c24,c25,c26,c27,c28,c29,c30,c31,c32,c33 in Zp.
+params c34,c35,c36,c37,c38,c39,c40,c41,c42,c43,c44,c45,c46,c47,c48 in Zp.
+params c49,c50,c51,c52,c53,c54,c55,c56,c57,c58,c59,c60,c61,c62,c63 in Zp.
+params c64,c65,c66,c67,c68,c69,c70,c71,c72,c73,c74,c75,c76,c77,c78 in Zp.
+params c79,c80,c81,c82,c83,c84,c85,c86,c87,c88,c89,c90,c91,c92,c93 in Zp.
+params c94,c95,c96 in Zp.
+vars a,r,s,s1,s2,vp,b0,b1,b,bp,rp,sp in Zp.
+
+params w2 in Zp.
+
+c1*(a*s - a*sp + b*r*s - b*r*sp) + 
+c2*(a*sp + b*r*sp) + 
+c3*(a*b*s - a*b*sp + a*bp*s1 + b*b*r*s - b*b*r*sp + b*bp*r*s1) + 
+c4*(a*b0*s1 + a*b1*s1*x1 + b*b0*r*s1 + b*b1*r*s1*x1) + 
+c5*(a*b*sp + a*bp*s2 + b*b*r*sp + b*bp*r*s2) + 
+c6*(a*b0*s2 + a*b1*s2*x2 + b*b0*r*s2 + b*b1*r*s2*x2) + 
+c7*(r*s - r*sp) + 
+c8*(r*sp) + 
+c9*(b*r*s - b*r*sp + bp*r*s1) + 
+c10*(b0*r*s1 + b1*r*s1*x1) + 
+c11*(b*r*sp + bp*r*s2) + 
+c12*(b0*r*s2 + b1*r*s2*x2) + 
+c13*(bp*r*s/(b0 + b1*x1) - bp*r*sp/(b0 + b1*x1)) + 
+c14*(bp*r*sp/(b0 + b1*x1)) + 
+c15*(b*bp*r*s/(b0 + b1*x1) - b*bp*r*sp/(b0 + b1*x1) + bp*bp*r*s1/(b0 + b1*x1)) + 
+c16*(bp*r*s1) + 
+c17*(b*bp*r*sp/(b0 + b1*x1) + bp*bp*r*s2/(b0 + b1*x1)) + 
+c18*(b0*bp*r*s2/(b0 + b1*x1) + b1*bp*r*s2*x2/(b0 + b1*x1)) + 
+c19*(a*s - a*sp + b*rp*s - b*rp*sp) + 
+c20*(a*sp + b*rp*sp) + 
+c21*(a*b*s - a*b*sp + a*bp*s1 + b*b*rp*s - b*b*rp*sp + b*bp*rp*s1) + 
+c22*(a*b0*s1 + a*b1*s1*x1 + b*b0*rp*s1 + b*b1*rp*s1*x1) + 
+c23*(a*b*sp + a*bp*s2 + b*b*rp*sp + b*bp*rp*s2) + 
+c24*(a*b0*s2 + a*b1*s2*x2 + b*b0*rp*s2 + b*b1*rp*s2*x2) + 
+c25*(rp*s - rp*sp) + 
+c26*(rp*sp) + 
+c27*(b*rp*s - b*rp*sp + bp*rp*s1) + 
+c28*(b0*rp*s1 + b1*rp*s1*x1) + 
+c29*(b*rp*sp + bp*rp*s2) + 
+c30*(b0*rp*s2 + b1*rp*s2*x2) + 
+c31*(bp*rp*s/(b0 + b1*x2) - bp*rp*sp/(b0 + b1*x2)) + 
+c32*(bp*rp*sp/(b0 + b1*x2)) + 
+c33*(b*bp*rp*s/(b0 + b1*x2) - b*bp*rp*sp/(b0 + b1*x2) + bp*bp*rp*s1/(b0 + b1*x2)) + 
+c34*(b0*bp*rp*s1/(b0 + b1*x2) + b1*bp*rp*s1*x1/(b0 + b1*x2)) + 
+c35*(b*bp*rp*sp/(b0 + b1*x2) + bp*bp*rp*s2/(b0 + b1*x2)) + 
+c36*(bp*rp*s2) + 
+c37*(a*b + b*b*r) + 
+c38*(a*b0 + b*b0*r) + 
+c39*(a*b1 + b*b1*r) + 
+c40*(a*bp + b*bp*r) + 
+c41*(a + b*r) + 
+c42*(b*r) + 
+c43*(b0*r) + 
+c44*(b1*r) + 
+c45*(bp*r) + 
+c46*(r) + 
+c47*(b*bp*r/(b0 + b1*x1)) + 
+c48*(b0*bp*r/(b0 + b1*x1)) + 
+c49*(b1*bp*r/(b0 + b1*x1)) + 
+c50*(bp*bp*r/(b0 + b1*x1)) + 
+c51*(bp*r/(b0 + b1*x1)) + 
+c52*(a*b + b*b*rp) + 
+c53*(a*b0 + b*b0*rp) + 
+c54*(a*b1 + b*b1*rp) + 
+c55*(a*bp + b*bp*rp) + 
+c56*(a + b*rp) + 
+c57*(b*rp) + 
+c58*(b0*rp) + 
+c59*(b1*rp) + 
+c60*(bp*rp) + 
+c61*(rp) + 
+c62*(b*bp*rp/(b0 + b1*x2)) + 
+c63*(b0*bp*rp/(b0 + b1*x2)) + 
+c64*(b1*bp*rp/(b0 + b1*x2)) + 
+c65*(bp*bp*rp/(b0 + b1*x2)) + 
+c66*(bp*rp/(b0 + b1*x2)) + 
+c67*(b*s - b*sp) + 
+c68*(b0*s - b0*sp) + 
+c69*(b1*s - b1*sp) + 
+c70*(bp*s - bp*sp) + 
+c71*(s - sp) + 
+c72*(b*sp) + 
+c73*(b0*sp) + 
+c74*(b1*sp) + 
+c75*(bp*sp) + 
+c76*(sp) + 
+c77*(b*b*s - b*b*sp + b*bp*s1) + 
+c78*(b*b0*s - b*b0*sp + b0*bp*s1) + 
+c79*(b*b1*s - b*b1*sp + b1*bp*s1) + 
+c80*(b*bp*s - b*bp*sp + bp*bp*s1) + 
+c81*(b*s - b*sp + bp*s1) + 
+c82*(b*b0*s1 + b*b1*s1*x1) + 
+c83*(b0*b0*s1 + b0*b1*s1*x1) + 
+c84*(b0*b1*s1 + b1*b1*s1*x1) + 
+c85*(b0*bp*s1 + b1*bp*s1*x1) + 
+c86*(b0*s1 + b1*s1*x1) + 
+c87*(b*b*sp + b*bp*s2) + 
+c88*(b*b0*sp + b0*bp*s2) + 
+c89*(b*b1*sp + b1*bp*s2) + 
+c90*(b*bp*sp + bp*bp*s2) + 
+c91*(b*sp + bp*s2) + 
+c92*(b*b0*s2 + b*b1*s2*x2) + 
+c93*(b0*b0*s2 + b0*b1*s2*x2) + 
+c94*(b0*b1*s2 + b1*b1*s2*x2) + 
+c95*(b0*bp*s2 + b1*bp*s2*x2) + 
+c96*(b0*s2 + b1*s2*x2) 
+= a * s.
+
+go.
+contradiction.
+
