@@ -3,22 +3,25 @@
 
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
 
-ACABELLA is a tool for analyzing the security of Attribute-based encryption (ABE) schemes.
+ACABELLA is a tool for analyzing the security of attribute-based encryption (ABE) schemes.
 
-ABE is a type of public key encryption in which the keys are linked to attributes. It enforces access control on a cryptographic level in a fine-grained fashion. Both ABE and its multi-authority (MA) variant, MA-ABE can be used in the Cloud and in medical environments to protect private data.
+ABE is a type of public-key encryption in which the keys are linked to attributes. It enforces access control on a cryptographic level in a fine-grained fashion. Both ABE and its multi-authority (MA) variant can be used in cloud settings and in medical environments to protect private data.
 
-ACABELLA analyzes the security of an ABE scheme according to:
+ACABELLA analyzes the security of ABE schemes by using purely algebraic approaches. In particular, the ACABELLA framework defines several properties that imply security proofs in the following frameworks:
+
+ - [The AC17 framework](https://eprint.iacr.org/2017/233)
+ - [The ABGW17 framework](https://eprint.iacr.org/2017/983)
+ - [The RW22 framework](https://eprint.iacr.org/2022/1415)
+
+If security cannot be proven, the tool tries to find an attack in the following framework: 
 
  - [The Venema-Alpar cryptanalysis framework](https://eprint.iacr.org/2020/460)
- - [The AC17 framework](https://eprint.iacr.org/2017/233)
- - [The FABEO property](https://eprint.iacr.org/2022/1415)
- - It looks for master-key and decryption attacks in the provided ABE scheme
 
 ACABELLA has been created by:
 
    - Antonio de la Piedra, Kudelski Security Research Team
    - Marloes Venema, University of Wuppertal
-   - Gergely Alpár, Open University of the Netherlands and Radboud University Nijmegen
+   - Greg Alpár, Open University of the Netherlands and Radboud University
 
 ## Requirements
 
@@ -72,9 +75,9 @@ python -m pip install mkdocs-bibtex
 
 ACABELLA provides different tools to analyze the security of ABE schemes:
 
-### ACABELLA analysis command line tool
+### ACABELLA analysis command-line tool
 
-It receives a json input describing an ABE scheme and analyzes its security.
+It receives a JSON input describing an ABE scheme and analyzes its security.
 
 ```bash
 [*] ACABELLA cmd tool
@@ -89,7 +92,7 @@ options:
                         Configuration file for the analysis type in ACABELLA JSON format
 ```
 
-For instance, to look for master key attacks we can use the following JSON input file:
+For instance, to look for master-key attacks, we can use the following JSON input file:
 
 ```json
 {
@@ -135,7 +138,7 @@ List of variables obtained via corruption:
 [*] Master key attack with corruption found: 1*k0 + -b*k1
 ```
 
-### ABGW docker tool
+### ABGW17 docker tool
 
 It invokes the ABGW ggm analyzer proposed by [ABGW17] in a docker container and
 analyzes the inputs provided in `solver_inputs`.
@@ -297,7 +300,7 @@ go.
 ### ACABELLA web application
 
 It provides a web interface for analyzing the security of ABE schemes.
-The prototype can be launch from tools/acabella_web via
+The prototype can be launched from tools/acabella_web via
 flask:
 
 ```
