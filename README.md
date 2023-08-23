@@ -20,7 +20,7 @@ If security cannot be proven, the tool tries to find an attack in the following 
 ACABELLA has been created by:
 
    - Antonio de la Piedra, Kudelski Security Research Team
-   - Marloes Venema, University of Wuppertal
+   - Marloes Venema, University of Wuppertal and Raboud University
    - Greg Alpár, Open University of the Netherlands and Radboud University
 
 ## Requirements
