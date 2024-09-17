@@ -23,6 +23,14 @@ ACABELLA has been created by:
    - Marloes Venema, University of Wuppertal and Raboud University
    - Greg Alpár, Open University of the Netherlands and Radboud University
 
+## In memoriam
+
+We would like to honor the memory of Antonio, who worked on ACABELLA and the early stages of the Ven23 extension (which is covered by the [ISABELLA extension](https://github.com/lincolncryptools/ISABELLA)), but sadly enough passed away before he could see the fruits of his labor. He is missed tremendously, and we hope that his memory carries on through his works, both those that he finished and worked on at the time of his death.
+
+## ACABELLA extensions
+
+As part of the [ISABELLA](https://eprint.iacr.org/2024/1352) paper, the ACABELLA tool was extended to cover a broader class of schemes. This extension can be found [here](https://github.com/lincolncryptools/ISABELLA).
+
 ## Requirements
 
 - For ACABELLA:
